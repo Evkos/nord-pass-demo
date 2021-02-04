@@ -13,6 +13,7 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({items}) => {
+
     const weakItemsCount = items.reduce((count, item) => (
         itemHasWeakPassword(item) ? (count + 1) : count
     ), 0)
@@ -27,6 +28,7 @@ const Filter: FC<IFilter> = ({items}) => {
 
     return (
         <div className="filter">
+            <FilterTab title="All" count={items.length} path={Routes.PasswordHealth}/>
             <FilterTab title="Weak" count={weakItemsCount} path={Routes.Weak}/>
             <FilterTab title="Reused" count={reusedItemsCount} path={Routes.Reused}/>
             <FilterTab title="Old" count={oldItemsCount} path={Routes.Old}/>

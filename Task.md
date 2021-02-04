@@ -8,7 +8,7 @@
 * ~~Create additional tab (old) that should show passwords older than 30d~~
 * Validate login username, password
 * Add loader to login page
-* After Password update page should not be reloaded
+* ~~After Password update page should not be reloaded~~
 * Add tests
 * Refactor to make the code neat and clean - this will keep your teammates happy
 * Fix as many errors as you notice
