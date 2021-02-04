@@ -36,6 +36,7 @@ export const UpdateModal: FC<IUpdateModal> = ({item}) => {
                 isOpen={showModal}
                 onRequestClose={() => setShowModal(false)}
                 contentLabel="Example Modal"
+                ariaHideApp={false}
             >
                 <h1>Update Password</h1>
                 <input

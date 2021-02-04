@@ -30,10 +30,6 @@ export const Login = () => {
         }
     };
 
-    if (isLoading) {
-        return <LoadingScreen/>
-    }
-
     return (
         <div className="login-page">
             <form className="login-form" onSubmit={handleSubmit}>
@@ -55,10 +51,12 @@ export const Login = () => {
                     className="input mt-24px"
                 />
                 <ErrorBlock error={errorMessage}/>
+                {isLoading && <LoadingScreen/>}
                 <button type="submit" className="button mt-24px">
                     Login
                 </button>
             </form>
+
         </div>
     )
 };
