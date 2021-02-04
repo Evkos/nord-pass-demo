@@ -5,7 +5,7 @@ import {List} from './components/List/List';
 import {Filter} from './components/Filter/Filter';
 import {Header} from './components/Header/Header';
 
-import {useItemsProvider} from './useItemsProvider';
+import {useItemsProvider} from './hooks/useItemsProvider';
 import ErrorBlock from '../../components/common/ErrorBlock';
 import {LoadingScreen} from '~/components/common/LoadingScreen';
 
