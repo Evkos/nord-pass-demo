@@ -1,8 +1,9 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
+
 import {Routes} from '~/constants';
 
-const PrivateRoute: FC<RouteProps> = ({
+export const PrivateRoute: FC<RouteProps> = ({
   path,
   component,
 }) => {
@@ -15,5 +16,3 @@ const PrivateRoute: FC<RouteProps> = ({
 
   return <Route path={path} component={component}/>
 };
-
-export default PrivateRoute;

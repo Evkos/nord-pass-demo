@@ -1,7 +1,8 @@
-import React, {FC, useState} from "react";
-import updateItem from "~/services/updateItem";
-import {IItem} from "~/services/getUserItems";
+import React, {FC, useState} from 'react';
 import Modal from 'react-modal';
+
+import {updateItem} from '~/api/services';
+import {IItem} from '~/types'
 
 interface IUpdateModal {
     item: IItem;

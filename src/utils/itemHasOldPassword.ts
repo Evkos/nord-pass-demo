@@ -1,11 +1,9 @@
-import {IItem} from "~/services/getUserItems";
+import {IItem} from '~/types'
 
-const itemHasOldPassword = (item: IItem) => {
+export const itemHasOldPassword = (item: IItem) => {
     const createdAtDate = new Date(item.createdAt).getTime();
     const todayDate = new Date().getTime();
     const thirtyDaysInMilliseconds = 2592000000;
 
     return (todayDate - createdAtDate) > thirtyDaysInMilliseconds;
 };
-
-export default itemHasOldPassword;

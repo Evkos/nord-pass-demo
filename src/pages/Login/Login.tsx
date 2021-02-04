@@ -1,12 +1,13 @@
 import {SyntheticEvent, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+
 import {Routes} from '~/constants';
-import login from '~/services/login';
-import ErrorBlock from '../ErrorBlock';
+import {login} from '~/api/services';
+import ErrorBlock from '../../components/common/ErrorBlock';
 
 import './login-style.scss';
 
-const Login = () => {
+export const Login = () => {
   const {push} = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -52,5 +53,3 @@ const Login = () => {
     </div>
   )
 };
-
-export default Login;

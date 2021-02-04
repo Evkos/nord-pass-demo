@@ -1,18 +1,19 @@
 import React, {FC} from 'react';
+
 import {Routes} from "~/constants";
-import {IItem} from "~/services/getUserItems";
-import FilterTab from "./components/FilterTab"
+import {IItem} from '~/types'
+import {FilterTab} from "./components/FilterTab"
+import {itemHasWeakPassword} from "~/utils/itemHasWeakPassword";
+import {itemHasReusedPassword} from "~/utils/itemHasReusedPassword";
+import {itemHasOldPassword} from "~/utils/itemHasOldPassword";
 
 import './filter-style.scss';
-import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
-import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
-import itemHasOldPassword from "~/utils/itemHasOldPassword";
 
 interface IFilter {
     items: Array<IItem>;
 }
 
-const Filter: FC<IFilter> = ({items}) => {
+export const Filter: FC<IFilter> = ({items}) => {
 
     const weakItemsCount = items.reduce((count, item) => (
         itemHasWeakPassword(item) ? (count + 1) : count
@@ -35,5 +36,3 @@ const Filter: FC<IFilter> = ({items}) => {
         </div>
     );
 };
-
-export default Filter;

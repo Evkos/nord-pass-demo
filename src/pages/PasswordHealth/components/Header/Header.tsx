@@ -1,17 +1,18 @@
-import {FC} from 'react';
-import {IItem} from "~/services/getUserItems";
-import logout from '../../../../services/logout';
+import React, {FC} from 'react';
+import {useHistory} from 'react-router-dom';
+
+import {IItem} from '~/types'
+import {logout} from '~/api/services';
+import {Routes} from '~/constants';
 
 import './header-style.scss';
-import {Routes} from "~/constants";
-import {useHistory} from "react-router-dom";
 
 interface IHeader {
     items: Array<IItem>;
     username: string;
 }
 
-const Header: FC<IHeader> = ({items, username}) => {
+export const Header: FC<IHeader> = ({items, username}) => {
 
     const {push} = useHistory();
 
@@ -30,5 +31,3 @@ const Header: FC<IHeader> = ({items, username}) => {
         </div>
     )
 };
-
-export default Header;

@@ -1,8 +1,9 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
+
 import {Routes} from '~/constants';
 
-const PublicRoute: FC<RouteProps> = ({
+export const PublicRoute: FC<RouteProps> = ({
  path,
  component,
 }) => {
@@ -15,5 +16,3 @@ const PublicRoute: FC<RouteProps> = ({
 
   return <Route path={path} component={component}/>
 };
-
-export default PublicRoute;

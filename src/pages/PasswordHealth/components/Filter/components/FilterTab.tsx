@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {useHistory} from 'react-router-dom';
 
 interface IFilterTab {
@@ -7,7 +7,7 @@ interface IFilterTab {
   path: string;
 }
 
-const FilterTab: FC<IFilterTab> = ({
+export const FilterTab: FC<IFilterTab> = ({
   title,
   count,
   path,
@@ -20,5 +20,3 @@ const FilterTab: FC<IFilterTab> = ({
     </div>
   );
 }
-
-export default FilterTab

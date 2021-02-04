@@ -1,4 +1,4 @@
-import itemHasReusedPassword from '../itemHasReusedPassword';
+import {itemHasReusedPassword} from '../itemHasReusedPassword';
 
 const items = [
    {

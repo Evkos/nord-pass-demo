@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { API } from '~/constants';
-import getUrl from '~/utils/getUrl';
+import {getUrl} from '~/utils/getUrl';
 
 interface IUser {
   updateUser: () => void;
@@ -82,5 +82,3 @@ export const UserContextProvider = ({ children }) => {
     </UserContext.Provider>
   )
 }
-
-export default UserContext;

@@ -1,6 +1,7 @@
-import {FC} from 'react';
-import {IItem} from "~/services/getUserItems";
-import ItemIcon from './components/ItemIcon';
+import React, {FC} from 'react';
+
+import {IItem} from '~/types'
+import {ItemIcon} from './components/ItemIcon';
 import {UpdateModal} from './components/UpdateModal'
 
 import './list-style.scss';
@@ -10,11 +11,11 @@ interface IList {
 }
 
 
-const List: FC<IList> = ({items}) => (
+export const List: FC<IList> = ({items}) => (
     <ul className="list">
         {
             items.map((item) => (
-                <li className="item">
+                <li className="item" key={item.id}>
                     <ItemIcon title={item.title}/>
                     <div>
                         <div className="title">
@@ -30,5 +31,3 @@ const List: FC<IList> = ({items}) => (
         }
     </ul>
 )
-
-export default List;

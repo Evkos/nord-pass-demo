@@ -1,6 +1,6 @@
-import {IItem} from "~/services/getUserItems";
+import {IItem} from '~/types'
 
-const itemHasWeakPassword = (item: IItem) => {
+export const itemHasWeakPassword = (item: IItem) => {
   const { password } = item;
 
   const strength = [
@@ -12,5 +12,3 @@ const itemHasWeakPassword = (item: IItem) => {
 
   return strength > 2;
 };
-
-export default itemHasWeakPassword;
