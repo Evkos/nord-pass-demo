@@ -8,6 +8,7 @@ import {Route, Switch} from "react-router-dom";
 import {Routes} from '~/constants';
 import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
+import itemHasOldPassword from "~/utils/itemHasOldPassword";
 import { useUserContext } from '../UserContext';
 
 const PasswordHealth = () => {
@@ -44,6 +45,9 @@ const PasswordHealth = () => {
         </Route>
         <Route path={Routes.Reused}>
           <List items={items.filter((item) => itemHasReusedPassword(item, items))}/>
+        </Route>
+        <Route path={Routes.Old}>
+          <List items={items.filter(itemHasOldPassword)}/>
         </Route>
       </Switch>
     </div>

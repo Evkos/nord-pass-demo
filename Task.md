@@ -4,8 +4,8 @@
 
  Our customer support team is receiving a storm of complaints. You're the only guy who can solve this problem. Here's what you have to do to fix the situation:
 
-* You may notice that logout button is not working
-* Create additional tab (old) that should show passwords older than 30d
+* ~~You may notice that logout button is not working~~ 
+* ~~Create additional tab (old) that should show passwords older than 30d~~
 * Validate login username, password
 * Add loader to login page
 * After Password update page should not be reloaded
