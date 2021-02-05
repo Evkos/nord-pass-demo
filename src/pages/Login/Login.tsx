@@ -5,26 +5,45 @@ import {Routes} from '~/constants';
 import {login} from '~/api/services';
 import ErrorBlock from '../../components/common/ErrorBlock';
 import {LoadingScreen} from "~/components/common/LoadingScreen";
+import {validateForm} from "~/utils/formValidator";
 
 import './login-style.scss';
+import {ValidatedInput} from "~/components/common/ValidatedInput";
+
+
+const initialFormData = {
+    username: '',
+    password: ''
+}
 
 export const Login = () => {
     const {push} = useHistory();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, updateFormData] = useState(initialFormData);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string>();
+    const [serverErrorMessage, setServerErrorMessage] = useState<string>();
+    const [errorMessages, setErrorMessages] = useState(null);
 
+    const handleChange = (e) => {
+        updateFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim()
+        });
+    };
 
     const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setErrorMessage(null);
+        setServerErrorMessage(null);
+        const formErrors = validateForm(formData)
+
+        console.log(formErrors)
+
+
         setIsLoading(true)
         try {
-            await login(username, password);
+            await login(formData.username, formData.password);
             push(Routes.PasswordHealth);
         } catch (error) {
-            setErrorMessage(error.message);
+            setServerErrorMessage(error.message);
         } finally {
             setIsLoading(false)
         }
@@ -33,24 +52,23 @@ export const Login = () => {
     return (
         <div className="login-page">
             <form className="login-form" onSubmit={handleSubmit}>
-                <h1 className="text-center">
-                    Password Health
-                </h1>
-                <input
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
+                <h1 className="text-center"> Password Health </h1>
+                <ValidatedInput
+                    value={formData.username}
+                    error={errorMessages?.username}
+                    handleChange={handleChange}
+                    name="username"
                     placeholder="Username"
-                    type="text"
-                    className="input mt-52px"
                 />
-                <input
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                <ValidatedInput
+                    value={formData.password}
+                    error={errorMessages?.password}
+                    handleChange={handleChange}
+                    name="password"
                     placeholder="Password"
                     type="password"
-                    className="input mt-24px"
                 />
-                <ErrorBlock error={errorMessage}/>
+                <ErrorBlock error={serverErrorMessage}/>
                 {isLoading && <LoadingScreen/>}
                 <button type="submit" className="button mt-24px">
                     Login
