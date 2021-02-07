@@ -30,10 +30,16 @@ export const Login = () => {
         event.preventDefault();
         // @ts-ignore
         const formDataObj = new FormData(event.target)
-        const formData = {
-            username: `${formDataObj.get('username')}`,
-            password: `${formDataObj.get('password')}`
-        }
+        const formData = [
+            {
+                name: 'username',
+                value: `${formDataObj.get('username')}`
+            },
+            {
+                name: 'password',
+                value: `${formDataObj.get('password')}`
+            }
+        ]
 
         const formErrors = validateForm(formData)
         setErrorsState(formErrors)
@@ -46,7 +52,7 @@ export const Login = () => {
         setServerErrorMessage(null);
         setIsLoading(true);
         try {
-            await login(formData.username, formData.password);
+            await login(formData);
             push(Routes.PasswordHealth);
         } catch (error) {
             setServerErrorMessage(error.message);

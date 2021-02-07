@@ -39,17 +39,9 @@ export const validateField = (field) => {
 
 export const validateForm = (formData) => {
 
-  const formFields = []
   const errors = {}
 
-  Object.keys(formData).map((fieldName) => {
-    formFields.push({
-      name: fieldName,
-      value: formData[fieldName]
-    })
-  })
-
-  formFields.map((field) => {
+  formData.map((field) => {
     const fieldError = validateField(field)
     Object.assign(errors, fieldError)
   })

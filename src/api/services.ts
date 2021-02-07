@@ -2,11 +2,15 @@ import {API} from '~/constants';
 import {getUrl} from '~/utils/getUrl';
 import {IItem} from "~/types";
 
-export const login = async (username: string, password: string) => {
-    const url = getUrl(API.Login, {
-        username,
-        password,
-    });
+export const login = async (formData) => {
+
+    const params = {}
+
+    formData.map((field) => {
+        Object.assign(params, {[field.name]: field.value})
+    })
+
+    const url = getUrl(API.Login, params);
 
     const response = await fetch(url);
     const {token} = await response.json();
