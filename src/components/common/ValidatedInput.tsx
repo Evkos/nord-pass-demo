@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ValidatedInput = ({
-                                   value,
+                                   // value,
                                    error,
                                    handleChange,
                                    type = "text",
@@ -11,7 +11,7 @@ export const ValidatedInput = ({
     return (
         <>
             <input
-                value={value}
+                // value={value}
                 onChange={handleChange}
                 placeholder={placeholder}
                 name={name}

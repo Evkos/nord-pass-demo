@@ -5,40 +5,46 @@ import {Routes} from '~/constants';
 import {login} from '~/api/services';
 import ErrorBlock from '../../components/common/ErrorBlock';
 import {LoadingScreen} from "~/components/common/LoadingScreen";
-import {validateForm} from "~/utils/formValidator";
+import {validateField, validateForm} from "~/utils/formValidator";
 
 import './login-style.scss';
 import {ValidatedInput} from "~/components/common/ValidatedInput";
 
 
-const initialFormData = {
-    username: '',
-    password: ''
-}
-
 export const Login = () => {
     const {push} = useHistory();
-    const [formData, updateFormData] = useState(initialFormData);
     const [isLoading, setIsLoading] = useState(false);
     const [serverErrorMessage, setServerErrorMessage] = useState<string>();
-    const [errorMessages, setErrorMessages] = useState(null);
+    const [errorsState, setErrorsState] = useState(null);
 
-    const handleChange = (e) => {
-        updateFormData({
-            ...formData,
-            [e.target.name]: e.target.value.trim()
-        });
+    const handleChange = e => {
+        let errorsStateNew = {...errorsState}
+        delete errorsStateNew[e.target.name]
+
+        const fieldErrors = validateField(e.target)
+        errorsStateNew = {...errorsStateNew, ...fieldErrors}
+        setErrorsState(errorsStateNew)
     };
 
     const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setServerErrorMessage(null);
+        // @ts-ignore
+        const formDataObj = new FormData(event.target)
+        const formData = {
+            username: `${formDataObj.get('username')}`,
+            password: `${formDataObj.get('password')}`
+        }
+
         const formErrors = validateForm(formData)
+        setErrorsState(formErrors)
 
-        console.log(formErrors)
+        if (Object.keys(formErrors).length !== 0) {
+            return
+        }
 
-
-        setIsLoading(true)
+        //Get result from server
+        setServerErrorMessage(null);
+        setIsLoading(true);
         try {
             await login(formData.username, formData.password);
             push(Routes.PasswordHealth);
@@ -54,15 +60,13 @@ export const Login = () => {
             <form className="login-form" onSubmit={handleSubmit}>
                 <h1 className="text-center"> Password Health </h1>
                 <ValidatedInput
-                    value={formData.username}
-                    error={errorMessages?.username}
+                    error={errorsState?.username}
                     handleChange={handleChange}
                     name="username"
                     placeholder="Username"
                 />
                 <ValidatedInput
-                    value={formData.password}
-                    error={errorMessages?.password}
+                    error={errorsState?.password}
                     handleChange={handleChange}
                     name="password"
                     placeholder="Password"
